@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asistentes a Eventos - DWEC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .container {
+            max-width: 900px;
+        }
+        .card-registro {
+            border: none;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        .card-header {
+            background-color: #3d7f88ff;
+            color: white;
+            border-radius: 1rem 1rem 0 0 !important;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        h5 {
+            margin-top: 25px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e0e0e0;
+            color: #1a5f64;
+        }
+        .btn-submit {
+            background-color: #ff9800;
+            border-color: #ff9800;
+            transition: all 0.3s ease;
+        }
+        .btn-submit:hover {
+            background-color: #e68a00;
+            border-color: #e68a00;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card card-registro">
+        <div class="card-header">
+            Formulario de Inscripción al Evento
+        </div>
+        <div class="card-body">
+            <form action="procesar_evento.php" method="POST" enctype="multipart/form-data" onsubmit="return validarFormulario()">
+
+                <h5>1. Información Personal</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="nombre_completo" class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control" id="nombre_completo" name="nombre_completo" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                        <div class="form-text">Usaremos este correo para enviar tu entrada.</div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Número de Teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" pattern="[0-9]{9,}" title="Introduce un número de teléfono válido (mínimo 9 dígitos)">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label class="form-label d-block">Género</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genero" id="genero_m" value="Masculino" required>
+                        <label class="form-check-label" for="genero_m">Masculino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genero" id="genero_f" value="Femenino">
+                        <label class="form-check-label" for="genero_f">Femenino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genero" id="genero_o" value="Otro">
+                        <label class="form-check-label" for="genero_o">Otro</label>
+                    </div>
+                </div>
+
+                <h5>2. Información del Evento</h5>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="fecha_evento" class="form-label">Fecha del Evento</label>
+                        <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="tipo_entrada" class="form-label">Tipo de Entrada</label>
+                        <select class="form-select" id="tipo_entrada" name="tipo_entrada" required>
+                            <option value="">Selecciona un tipo de entrada</option>
+                            <option value="General">General</option>
+                            <option value="VIP">VIP</option>
+                            <option value="Estudiante">Estudiante</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label class="form-label d-block">Preferencias de Comida (Puedes seleccionar varias)</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="preferencias_comida[]" id="pref_veg" value="Vegetariano">
+                        <label class="form-check-label" for="pref_veg">Vegetariano</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="preferencias_comida[]" id="pref_vegan" value="Vegano">
+                        <label class="form-check-label" for="pref_vegan">Vegano</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="preferencias_comida[]" id="pref_gluten" value="Sin Gluten">
+                        <label class="form-check-label" for="pref_gluten">Sin Gluten</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="preferencias_comida[]" id="pref_none" value="Sin Preferencias">
+                        <label class="form-check-label" for="pref_none">Sin Preferencias</label>
+                    </div>
+                </div>
+
+                <h5>3. Información de Acceso</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="username" class="form-label">Nombre de Usuario</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" minlength="6" required>
+                        <div class="form-text">Mínimo 6 caracteres.</div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="password_confirm" class="form-label">Confirmación de Contraseña</label>
+                        <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
+                        <div class="invalid-feedback" id="pass_match_feedback">
+                            Las contraseñas no coinciden.
+                        </div>
+                    </div>
+                </div>
+
+                <h5>4. Preferencias y Términos</h5>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="si" id="recibir_notificaciones" name="recibir_notificaciones">
+                    <label class="form-check-label" for="recibir_notificaciones">
+                        Deseo recibir notificaciones por correo electrónico.
+                    </label>
+                </div>
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="checkbox" value="si" id="terminos_condiciones" name="terminos_condiciones" required>
+                    <label class="form-check-label" for="terminos_condiciones">
+                        Acepto los <a href="#" class="text-primary">términos y condiciones</a>.
+                    </label>
+                    <div class="invalid-feedback">
+                        Debes aceptar los términos y condiciones.
+                    </div>
+                </div>
+
+
+                <h5>5. Encuesta Adicional</h5>
+                <label for="calificacion_eventos" class="form-label">Calificación de eventos anteriores (1 a 10): <span id="calificacion_valor">5</span></label>
+                <input type="range" class="form-range" min="1" max="10" step="1" value="5" id="calificacion_eventos" name="calificacion_eventos">
+
+                <div class="mt-3">
+                    <label for="comentarios" class="form-label">Comentarios Adicionales</label>
+                    <textarea class="form-control" id="comentarios" name="comentarios" rows="3" placeholder="Indica cualquier necesidad especial o sugerencia..."></textarea>
+                </div>
+
+                <h5 class="mt-4">6. Adjuntar Archivo</h5>
+                <div class="mb-3">
+                    <label for="archivo_adjunto" class="form-label">Adjuntar Documento (Ej. ID de Estudiante para entrada reducida)</label>
+                    <input class="form-control" type="file" id="archivo_adjunto" name="archivo_adjunto">
+                </div>
+
+                <div class="d-grid gap-2 mt-4">
+                    <button type="submit" class="btn btn-lg btn-submit">
+                        Registrar Asistente
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    const passwordInput = document.getElementById('password');
+    const passwordConfirmInput = document.getElementById('password_confirm');
+
+    function validarFormulario() {
+        if (passwordInput.value !== passwordConfirmInput.value) {
+            passwordConfirmInput.classList.add('is-invalid');
+            return false;
+        } else {
+            passwordConfirmInput.classList.remove('is-invalid');
+            return true;
+        }
+    }
+
+    const rangeInput = document.getElementById('calificacion_eventos');
+    const rangeValueSpan = document.getElementById('calificacion_valor');
+
+    rangeInput.addEventListener('input', function() {
+        rangeValueSpan.textContent = this.value;
+    });
+
+    const passwordFields = [passwordInput, passwordConfirmInput];
+    for (const field of passwordFields) {
+        field.addEventListener('input', function() {
+            if (passwordInput.value === passwordConfirmInput.value) {
+                passwordConfirmInput.classList.remove('is-invalid');
+            }
+        });
+    }
+</script>
+</body>
+</html>
