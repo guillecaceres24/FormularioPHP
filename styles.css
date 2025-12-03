@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.container {
+    max-width: 900px;
+}
+.card-registro {
+    border: none;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+.card-header {
+    background-color: #3d7f88ff;
+    color: white;
+    border-radius: 1rem 1rem 0 0 !important;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+h5 {
+    margin-top: 25px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #e0e0e0;
+    color: #1a5f64;
+}
+.btn-submit {
+    background-color: #ff9800;
+    border-color: #ff9800;
+    transition: all 0.3s ease;
+}
+.btn-submit:hover {
+    background-color: #e68a00;
+    border-color: #e68a00;
+    transform: translateY(-2px);
+}

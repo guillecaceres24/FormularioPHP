@@ -3,51 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Asistentes a Eventos - DWEC</title>
+    <title>Registro de Asistentes a Eventos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
-            padding-top: 50px;
-            padding-bottom: 50px;
-        }
-        .container {
-            max-width: 900px;
-        }
-        .card-registro {
-            border: none;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-        }
-        .card-header {
-            background-color: #3d7f88ff;
-            color: white;
-            border-radius: 1rem 1rem 0 0 !important;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        h5 {
-            margin-top: 25px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #e0e0e0;
-            color: #1a5f64;
-        }
-        .btn-submit {
-            background-color: #ff9800;
-            border-color: #ff9800;
-            transition: all 0.3s ease;
-        }
-        .btn-submit:hover {
-            background-color: #e68a00;
-            border-color: #e68a00;
-            transform: translateY(-2px);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -206,35 +164,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    const passwordInput = document.getElementById('password');
-    const passwordConfirmInput = document.getElementById('password_confirm');
-
-    function validarFormulario() {
-        if (passwordInput.value !== passwordConfirmInput.value) {
-            passwordConfirmInput.classList.add('is-invalid');
-            return false;
-        } else {
-            passwordConfirmInput.classList.remove('is-invalid');
-            return true;
-        }
-    }
-
-    const rangeInput = document.getElementById('calificacion_eventos');
-    const rangeValueSpan = document.getElementById('calificacion_valor');
-
-    rangeInput.addEventListener('input', function() {
-        rangeValueSpan.textContent = this.value;
-    });
-
-    const passwordFields = [passwordInput, passwordConfirmInput];
-    for (const field of passwordFields) {
-        field.addEventListener('input', function() {
-            if (passwordInput.value === passwordConfirmInput.value) {
-                passwordConfirmInput.classList.remove('is-invalid');
-            }
-        });
-    }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
